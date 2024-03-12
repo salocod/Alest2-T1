@@ -1,3 +1,4 @@
+package src;
 public class Matriz {
     
     private int linhas, colunas;

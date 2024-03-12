@@ -1,3 +1,4 @@
+package src;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class Leitor {
 
     public void ler() {
         try {
-            br = new BufferedReader(new FileReader("teste1.txt"));
+            br = new BufferedReader(new FileReader("teste2.txt"));
             sc = new Scanner(br.readLine());
             matriz = new Matriz(sc.nextInt(), sc.nextInt());
             System.out.println("Linhas: " + matriz.getLinhas());
