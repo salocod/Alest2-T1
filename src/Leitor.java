@@ -39,7 +39,7 @@ public class Leitor {
                     }
                 }
             }
-            matriz.printarMatriz();
+            //matriz.printarMatriz();
             matriz.percorrer();
 
         } catch (Exception e) {
