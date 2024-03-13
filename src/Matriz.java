@@ -2,6 +2,22 @@ package src;
 
 public class Matriz {
 
+    /*
+     *   LOGiCA: \ ou / TROCA DE DIRECAO
+     *  DIRECAO N -> / DIRECAO = L
+     *  DIRECAO S -> / DIRECAO = O
+     *  DIRECAO L -> / DIRECAO = N
+     *  DIRECAO O -> / DIRECAO = S
+     * 
+     *  DIRECAO N -> \ DIRECAO = L
+     *  DIRECAO S -> \ DIRECAO = O
+     *  DIRECAO L -> \ DIRECAO = S
+     *  DIRECAO O -> \ DIRECAO = N
+     * 
+     */
+
+
+
     private int linhas /* eixoY */, colunas /* eixoX */;
     private String direcao; // N, S , L ->, O <-
     private String[][] matriz;
@@ -13,7 +29,7 @@ public class Matriz {
     }
 
     public void getValor(int eixoLinhas, int eixoColunas) {
-        System.out.println("Valor X: " +eixoLinhas + " e Y: " + eixoColunas + " = " + matriz[eixoLinhas][eixoColunas] + "");
+        System.out.println("Valor X: " + eixoLinhas + " e Y: " + eixoColunas + " = " + matriz[eixoLinhas][eixoColunas] + "");
     }
 
     public void setValor(int x, int y, String valor) {
@@ -63,17 +79,34 @@ public class Matriz {
                         }
                         break;
                     case "/":
+                    int sup = cont;
                         switch (direcao) {
                             case "N":
+                            sup++;
+                            if(matriz[i][sup].equals("|")) {
+                                direcao = "S";
+                                cont++;
+                                posicao = matriz[i][cont];
+                                break;
+                            } else {
                                 direcao = "L";
                                 cont++;
                                 posicao = matriz[i][cont];
                                 break;
+                            }
                             case "S":
+                            sup--;
+                            if(matriz[i][sup].equals("|")) {
+                                direcao = "N";
+                                cont--;
+                                posicao = matriz[i][cont];
+                                break;
+                            } else{
                                 direcao = "O";
                                 cont--;
                                 posicao = matriz[i][cont];
                                 break;
+                            }
                             case "L":
                                 direcao = "N";
                                  i--;
@@ -89,17 +122,33 @@ public class Matriz {
                         }
                         break;
                     case "\\":
+                    sup = cont;
                         switch (direcao) {
                             case "N":
+                            if(matriz[i][sup--].equals("|")) {
+                                direcao = "S";
+                                cont--;
+                                posicao = matriz[i][cont];
+                                break;
+                            } else {
                                 direcao = "O";
                                 cont--;
                                 posicao = matriz[i][cont];
                                 break;
+                            }
                             case "S":
+                            sup++;
+                            if(matriz[i][sup].equals("|")) {
+                                direcao = "N";
+                                cont++;
+                                posicao = matriz[i][cont];
+                                break;
+                            } else {
                                 direcao = "L";
                                 cont++;
                                 posicao = matriz[i][cont];
                                 break;
+                            }
                             case "L":
                                 direcao = "S";
                                 i++;
@@ -174,13 +223,7 @@ public class Matriz {
             }
             System.out.println(linha);
         }
-        // System.out.println(linha);
     }
-
-    // case "L":
-    // case "O":
-    // default:
-    // break;
 
     public int getLinhas() {
         return linhas;
