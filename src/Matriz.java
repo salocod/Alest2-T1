@@ -12,6 +12,10 @@ public class Matriz {
         this.colunas = colunas;
     }
 
+    public void getValor(int eixoLinhas, int eixoColunas) {
+        System.out.println("Valor X: " +eixoLinhas + " e Y: " + eixoColunas + " = " + matriz[eixoLinhas][eixoColunas] + "");
+    }
+
     public void setValor(int x, int y, String valor) {
         matriz[x][y] = valor;
     }
