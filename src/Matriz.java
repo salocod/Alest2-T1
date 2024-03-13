@@ -1,25 +1,9 @@
 package src;
 
 public class Matriz {
-
-    /*
-     *   LOGiCA: \ ou / TROCA DE DIRECAO
-     *  DIRECAO N -> / DIRECAO = L
-     *  DIRECAO S -> / DIRECAO = O
-     *  DIRECAO L -> / DIRECAO = N
-     *  DIRECAO O -> / DIRECAO = S
-     * 
-     *  DIRECAO N -> \ DIRECAO = L
-     *  DIRECAO S -> \ DIRECAO = O
-     *  DIRECAO L -> \ DIRECAO = S
-     *  DIRECAO O -> \ DIRECAO = N
-     * 
-     */
-
-
-
-    private int linhas /* eixoY */, colunas /* eixoX */;
-    private String direcao; // N, S , L ->, O <-
+    
+    private int linhas, colunas;
+    private String direcao;
     private String[][] matriz;
 
     public Matriz(int linhas, int colunas) {
@@ -48,7 +32,7 @@ public class Matriz {
     // percorrer
     public void percorrer() {
         String linha = "";
-        for (int i = 0; i < linhas; i++) {
+         for (int i = 0; i < linhas; i++) {
             if (!matriz[i][0].equals("-")) continue;
             int cont = 0;
             String posicao = matriz[i][cont];
@@ -79,34 +63,19 @@ public class Matriz {
                         }
                         break;
                     case "/":
-                    int sup = cont;
                         switch (direcao) {
                             case "N":
-                            sup++;
-                            if(matriz[i][sup].equals("|")) {
-                                direcao = "S";
-                                cont++;
-                                posicao = matriz[i][cont];
-                                break;
-                            } else {
                                 direcao = "L";
                                 cont++;
                                 posicao = matriz[i][cont];
                                 break;
-                            }
+                            
                             case "S":
-                            sup--;
-                            if(matriz[i][sup].equals("|")) {
-                                direcao = "N";
-                                cont--;
-                                posicao = matriz[i][cont];
-                                break;
-                            } else{
                                 direcao = "O";
                                 cont--;
                                 posicao = matriz[i][cont];
                                 break;
-                            }
+                            
                             case "L":
                                 direcao = "N";
                                  i--;
@@ -122,33 +91,19 @@ public class Matriz {
                         }
                         break;
                     case "\\":
-                    sup = cont;
                         switch (direcao) {
                             case "N":
-                            if(matriz[i][sup--].equals("|")) {
-                                direcao = "S";
-                                cont--;
-                                posicao = matriz[i][cont];
-                                break;
-                            } else {
                                 direcao = "O";
                                 cont--;
                                 posicao = matriz[i][cont];
                                 break;
-                            }
+                            
                             case "S":
-                            sup++;
-                            if(matriz[i][sup].equals("|")) {
-                                direcao = "N";
-                                cont++;
-                                posicao = matriz[i][cont];
-                                break;
-                            } else {
                                 direcao = "L";
                                 cont++;
                                 posicao = matriz[i][cont];
                                 break;
-                            }
+                            
                             case "L":
                                 direcao = "S";
                                 i++;
@@ -182,7 +137,7 @@ public class Matriz {
                                 break;
                             case "O":
                                 direcao = "O";
-                                cont++;
+                                cont--;
                                 posicao = matriz[i][cont];
                                 break;
                             default:
@@ -199,7 +154,7 @@ public class Matriz {
                     case "7":
                     case "8":
                     case "9":
-                        switch(direcao) {//AQUI DEVE FAZER A SOMA------------
+                        switch(direcao) {
                             case "N":
                                 i--;
                                 posicao = matriz[i][cont];
@@ -221,7 +176,8 @@ public class Matriz {
                         }
                 }
             }
-            System.out.println(linha);
+            System.out.println("Funcionou!");
+            break;
         }
     }
 

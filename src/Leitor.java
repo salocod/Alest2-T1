@@ -15,7 +15,7 @@ public class Leitor {
 
     public void ler() {
         try {
-            br = new BufferedReader(new FileReader("casoC50.txt"));
+            br = new BufferedReader(new FileReader("casoC1500.txt"));
             sc = new Scanner(br.readLine());
             matriz = new Matriz(sc.nextInt(), sc.nextInt());
             System.out.println("Linhas: " + matriz.getLinhas());
