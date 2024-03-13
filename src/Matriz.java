@@ -2,7 +2,7 @@ package src;
 
 public class Matriz {
     
-    private int linhas, colunas;
+    private int linhas, colunas, soma;
     private String direcao;
     private String[][] matriz;
 
@@ -10,6 +10,7 @@ public class Matriz {
         matriz = new String[linhas][colunas];
         this.linhas = linhas;
         this.colunas = colunas;
+        soma = 0;
     }
 
     public void getValor(int eixoLinhas, int eixoColunas) {
@@ -31,11 +32,12 @@ public class Matriz {
 
     // percorrer
     public void percorrer() {
+        @SuppressWarnings("unused")
         String linha = "";
          for (int i = 0; i < linhas; i++) {
             if (!matriz[i][0].equals("-")) continue;
             int cont = 0;
-            String posicao = matriz[i][cont];
+            String posicao = matriz[i][cont], valor = "";
             direcao = "L";
             while (!posicao.equals("#")) {
                 linha += posicao + "";
@@ -154,39 +156,60 @@ public class Matriz {
                     case "7":
                     case "8":
                     case "9":
+                    String numeros = "0123456789";
+                    valor += posicao;
                         switch(direcao) {
                             case "N":
                                 i--;
                                 posicao = matriz[i][cont];
+                                if(numeros.contains(posicao)) {
+                                    break;
+                                } else {
+                                    soma += Integer.parseInt(valor);
+                                    valor = "";
+                                }
                                 break;
                             case "S":
                                  i++;
                                 posicao = matriz[i][cont];
+                                if(numeros.contains(posicao)) {
+                                    break;
+                                } else {
+                                    soma += Integer.parseInt(valor);
+                                    valor = "";
+                                }
                                 break;
                             case "L":
                                 cont++;
                                 posicao = matriz[i][cont];
+                                if(numeros.contains(posicao)) {
+                                    break;
+                                } else {
+                                    soma += Integer.parseInt(valor);
+                                    valor = "";
+                                }
                                 break;
                             case "O":
                                 cont--;
                                 posicao = matriz[i][cont];
+                                if(numeros.contains(posicao)) {
+                                    break;
+                                } else {
+                                    soma += Integer.parseInt(valor);
+                                    valor = "";
+                                }
                                 break;
                             default:
                                 break;
                         }
                 }
             }
-            System.out.println("Funcionou!");
             break;
         }
     }
 
-    public int getLinhas() {
-        return linhas;
-    }
-
-    public int getColunas() {
-        return colunas;
-    }
+    public int getLinhas() {return linhas; }
+    public int getColunas() {return colunas;}
+    public int getSoma() {return soma;}
 
 }
