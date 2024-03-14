@@ -1,7 +1,7 @@
 package src;
 
 public class Matriz {
-    
+
     private int linhas, colunas, soma;
     private String direcao;
     private String[][] matriz;
@@ -14,7 +14,8 @@ public class Matriz {
     }
 
     public void getValor(int eixoLinhas, int eixoColunas) {
-        System.out.println("Valor X: " + eixoLinhas + " e Y: " + eixoColunas + " = " + matriz[eixoLinhas][eixoColunas] + "");
+        System.out.println(
+                "Valor X: " + eixoLinhas + " e Y: " + eixoColunas + " = " + matriz[eixoLinhas][eixoColunas] + "");
     }
 
     public void setValor(int x, int y, String valor) {
@@ -30,122 +31,108 @@ public class Matriz {
         }
     }
 
-    // percorrer
-    public void percorrer() {
-        @SuppressWarnings("unused")
-        String linha = "";
-         for (int i = 0; i < linhas; i++) {
-            if (!matriz[i][0].equals("-")) continue;
-            int cont = 0;
-            String posicao = matriz[i][cont], valor = "";
+    public void percorrer(int inicio) {
+            int cordX = 0, cordY = inicio;
+            String posicao = matriz[cordY][cordX], valor = "";
             direcao = "L";
             while (!posicao.equals("#")) {
-                linha += posicao + "";
                 switch (posicao) {
                     case "-":
                         switch (direcao) {
                             case "N":
-                                i--;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordY--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "S":
-                                 i++;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordY++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "L":
-                                cont++;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "O":
-                                cont--;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             default:
-                                break;
+                            break;
                         }
-                        break;
                     case "/":
                         switch (direcao) {
                             case "N":
                                 direcao = "L";
-                                cont++;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             
                             case "S":
                                 direcao = "O";
-                                cont--;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             
                             case "L":
                                 direcao = "N";
-                                 i--;
-                                posicao = matriz[i][cont];
-                                break;
+                                 cordY--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "O":
                                 direcao = "S";
-                                i++;
-                                posicao = matriz[i][cont];
-                                break;
+                               cordY++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             default:
-                                break;
+                            break;
                         }
-                        break;
                     case "\\":
                         switch (direcao) {
                             case "N":
                                 direcao = "O";
-                                cont--;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             
                             case "S":
                                 direcao = "L";
-                                cont++;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             
                             case "L":
                                 direcao = "S";
-                                i++;
-                                posicao = matriz[i][cont];
-                                break;
+                               cordY++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "O":
                                 direcao = "N";
-                                i--;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordY--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             default:
                                 break;
                         }
-                        break;
                     case "|":
                         switch (direcao) {
                             case "N":
-                                direcao = "N";
-                                i--;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordY--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "S":
-                                direcao = "S";
-                                 i++;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordY++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "L":
-                                direcao = "L";
-                                cont++;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX++;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             case "O":
-                                direcao = "O";
-                                cont--;
-                                posicao = matriz[i][cont];
-                                break;
+                                cordX--;
+                                posicao = matriz[cordY][cordX];
+                                continue;
                             default:
                                 break;
                         }
-                        break;
                     case "0":
                     case "1":
                     case "2":
@@ -160,56 +147,54 @@ public class Matriz {
                     valor += posicao;
                         switch(direcao) {
                             case "N":
-                                i--;
-                                posicao = matriz[i][cont];
-                                if(numeros.contains(posicao)) {
-                                    break;
-                                } else {
+                                cordY--;
+                                posicao = matriz[cordY][cordX];
+                                if(!numeros.contains(posicao)) {
                                     soma += Integer.parseInt(valor);
                                     valor = "";
                                 }
-                                break;
+                                continue;
                             case "S":
-                                 i++;
-                                posicao = matriz[i][cont];
-                                if(numeros.contains(posicao)) {
-                                    break;
-                                } else {
+                                cordY++;
+                                posicao = matriz[cordY][cordX];
+                                if(!numeros.contains(posicao)) {
                                     soma += Integer.parseInt(valor);
                                     valor = "";
                                 }
-                                break;
+                                continue;
                             case "L":
-                                cont++;
-                                posicao = matriz[i][cont];
-                                if(numeros.contains(posicao)) {
-                                    break;
-                                } else {
+                                cordX++;
+                                posicao = matriz[cordY][cordX];
+                                if(!numeros.contains(posicao)) {
                                     soma += Integer.parseInt(valor);
                                     valor = "";
                                 }
-                                break;
+                                continue;
                             case "O":
-                                cont--;
-                                posicao = matriz[i][cont];
-                                if(numeros.contains(posicao)) {
-                                    break;
-                                } else {
+                                cordX--;
+                                posicao = matriz[cordY][cordX];
+                                if(!numeros.contains(posicao)) {
                                     soma += Integer.parseInt(valor);
                                     valor = "";
                                 }
-                                break;
+                                continue;
                             default:
-                                break;
-                        }
-                }
+                                continue;
+                            }
             }
-            break;
         }
     }
 
-    public int getLinhas() {return linhas; }
-    public int getColunas() {return colunas;}
-    public int getSoma() {return soma;}
+    public int getLinhas() {
+        return linhas;
+    }
+
+    public int getColunas() {
+        return colunas;
+    }
+
+    public int getSoma() {
+        return soma;
+    }
 
 }

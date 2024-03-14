@@ -15,15 +15,19 @@ public class Leitor {
 
     public void ler() {
         try {
-            br = new BufferedReader(new FileReader("casoC750.txt"));
+            br = new BufferedReader(new FileReader("/Users/nicolasdoc/Desktop/Alest2-T1/casoc2000.txt"));
             sc = new Scanner(br.readLine());
             matriz = new Matriz(sc.nextInt(), sc.nextInt());
             System.out.println("Linhas: " + matriz.getLinhas());
             System.out.println("Colunas: " + matriz.getColunas());
 
+            int inicio = 0;
             for (int i = 0; i < matriz.getLinhas(); i++) {
                 String linha = br.readLine();
                 String[] valores = linha.split("");
+                if(valores[0].equals("-")) {
+                    inicio = i;
+                }
                 if (valores.length >= matriz.getColunas()) {
                     for (int j = 0; j < matriz.getColunas(); j++) {
                         matriz.setValor(i, j, valores[j]);
@@ -39,8 +43,8 @@ public class Leitor {
                     }
                 }
             }
-            matriz.percorrer();
-
+            matriz.percorrer(inicio);
+            System.out.println("Soma: " + matriz.getSoma());
         } catch (Exception e) {
             e.printStackTrace();
         }
