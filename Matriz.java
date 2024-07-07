@@ -4,7 +4,7 @@ public class Matriz {
     private String direcao;
     private String[][] matriz;
 
-    public Matriz(int linhas, int colunas) {
+    Matriz(int linhas, int colunas) {
         matriz = new String[linhas][colunas];
         this.linhas = linhas;
         this.colunas = colunas;
@@ -13,33 +13,33 @@ public class Matriz {
         y = 0;
     }
 
-    public void setValor(int x, int y, String valor) {if (isInBounds(x, y)) matriz[x][y] = valor;}
+    void setValor(int x, int y, String valor) {
+        if (isInBounds(x, y)) matriz[x][y] = valor;
+    }
 
     public void percorrer(int inicio) {
         x = 0;
         y = inicio;
-        String valor = "";
+        var valor = new StringBuilder();
         direcao = "L";
 
         while (isInBounds(y, x) && !matriz[y][x].equals("#")) {
-            String posicao = matriz[y][x];
+            var posicao = matriz[y][x];
             switch (posicao) {
-                case "-":
-                case "|":
+                case "-", "|":
                     mover();
                     break;
-                case "/":
-                case "\\":
+                case "/", "\\":
                     virarDiagonal(posicao);
                     mover();
                     break;
                 default:
                     if (Character.isDigit(posicao.charAt(0))) {
-                        valor += posicao;
+                        valor.append(posicao);
                         mover();
                         if (!isNumero(matriz[y][x])) {
-                            soma += Integer.parseInt(valor);
-                            valor = "";
+                            soma += Integer.parseInt(valor.toString());
+                            valor.setLength(0);
                         }
                     } else mover();
                     break;
@@ -64,7 +64,6 @@ public class Matriz {
             case "O" -> direcao = posicao.equals("/") ? "S" : "N";
         }
     }
-
     private boolean isInBounds(int y, int x) {return y >= 0 && y < linhas && x >= 0 && x < colunas;}
     private boolean isNumero(String posicao) {return posicao.matches("\\d");}
 
